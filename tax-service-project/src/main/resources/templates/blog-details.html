@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Podatkova</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:insert="blocks/header :: header"></div>
+
+
+
+<div class="container mt-5">
+
+    <div th:each="el : ${users}" class="alert alert-info mt-2">
+
+        <h1>Optional</h1>
+
+        <p><b> Name </b> <span th:text="${el.name}"></span></p>
+        <p><b> Email </b> <span th:text="${el.email}"></span></p>
+
+        <a th:href="'/report/' + ${el.id} + '/edit'" class="btn btn-warning"> Редактирувати </a><br><br>
+        <form th:action="'/report/' + ${el.id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit" > Удалити </button>
+        </form>
+
+
+    </div>
+</div>
+
+</body>
+</html>
