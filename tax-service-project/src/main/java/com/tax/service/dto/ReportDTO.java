@@ -12,9 +12,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class ReportDTO {
+
+    private Long id;
     private String name;
-    private LocalDate data;
-    private LocalDate email;
-    private String text;
-    private double amount;
+//    private LocalDate data;
+    private String email;
+    private String report;
+//    private double amount;
 }

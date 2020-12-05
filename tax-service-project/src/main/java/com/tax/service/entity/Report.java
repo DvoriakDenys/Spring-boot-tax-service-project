@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "Reports")
 public class Report {

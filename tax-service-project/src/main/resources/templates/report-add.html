@@ -7,18 +7,22 @@
 </head>
 <body>
 
-<div th:insert="blocks/header :: header"></div>
+<div th:insert="blocks/header-client :: header"></div>
 
 
 <div class="container mt-5 mb-5">
     <h1>Новий звіт</h1><br><br>
-    <form action="/report/add" method="post">
+    <form action="/client/report/add" method="post">
+
         <h3>Напишіть своє ім'я</h3>
         <input type="text" name="name" placeholder="enter your name" class="form-control"><br>
+
         <h3>Напишіть свою почту</h3>
         <input type="text" name="email" placeholder="enter your email" class="form-control"><br>
+
         <h3>Напишіть свій звіт</h3>
         <textarea name="report" placeholder="write your report here" class="form-control" rows="5" cols="33"></textarea><br>
+
         <button type="submit" class="btn btn-success">Подати звіт</button>
     </form>
 </div>

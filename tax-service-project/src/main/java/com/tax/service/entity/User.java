@@ -18,9 +18,9 @@ public class User {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = true, unique = true)
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)

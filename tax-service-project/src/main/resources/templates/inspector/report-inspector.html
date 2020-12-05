@@ -7,19 +7,18 @@
 </head>
 <body>
 
-<div th:insert="blocks/header-client :: header"></div>
+<div th:insert="blocks/header-inspector :: header"></div>
 
     <div class="container mt-5">
         <h1>Список звітів</h1>
 
-        <div th:each="el : ${reports}" class="alert alert-info mt-2">
+        <div th:each="el : ${users}" class="alert alert-info mt-2">
 
             <h3 Name ></h3>
-            <p th:text="${el.email}"></p>
 
-            <h4 Email > <p th:text="${el.name}"></p> </h4>
+            <p th:text="${el.name}"></p>
 
-            <a th:href="'/client/report/' + ${el.id}" class="btn btn-warning"> Переглянути звіт </a>
+            <a th:href="'/report/' + ${el.id}" class="btn btn-warning"> Переглянути звіт </a>
 
         </div>
     </div>

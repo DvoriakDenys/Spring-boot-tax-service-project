@@ -3,23 +3,25 @@ package com.tax.service.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping(value = "/inspector")
 public class InspectorController {
 
-    @GetMapping("/inspector")
+    @GetMapping()
     public String main (){
-        return "main-inspector";
+        return "inspector/main-inspector";
     }
 
-    @GetMapping("/inspector/users")
+    @GetMapping("/users")
     public String showListOfUsers(){
-        return "list-of-users";
+        return "inspector/list-of-users";
     }
 
-    @GetMapping("/inspector/reports")
+    @GetMapping("/report")
     public String showReport(){
-        return "reports";
+        return "inspector/report-inspector";
     }
 
 }
