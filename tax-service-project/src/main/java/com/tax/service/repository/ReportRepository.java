@@ -4,6 +4,9 @@ import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReportRepository extends JpaRepository<Report, Long> {
+import java.util.List;
+import java.util.Optional;
+//TODO Spring data sort, page
 
+public interface ReportRepository extends JpaRepository<Report, Long> {
 }

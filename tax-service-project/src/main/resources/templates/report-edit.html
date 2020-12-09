@@ -19,15 +19,23 @@
 
             <input type="hidden" th:value="${el.id}" name="id"  class="form-control"><br>
 
-            <h3>Редагуйте своє ім'я</h3>
-            <input type="text" th:value="${el.name}" name="name" placeholder="enter your name" class="form-control"><br>
+            <h3>Тема звіта</h3>
+            <input type="text" th:value="${el.nameOfReport}" name="nameOfReport" placeholder="Write the topic of the report" class="form-control"><br>
 
-            <h3>Редагуйте свій емайл</h3>
-            <input type="text" th:value="${el.email}" name="email" placeholder="enter your email" class="form-control"><br>
+            <h3>Прізвище</h3>
+            <input type="text" th:value="${el.firstname}" name="firstname" placeholder="Enter your firstname" class="form-control"><br>
 
-            <h3>Редагуйте свій звіт</h3>
-            <textarea name="report"  th:text="${el.report}" placeholder="write your report here" class="form-control" rows="5" cols="33">
+            <h3>Ім'я</h3>
+            <input type="text" th:value="${el.name}" name="name" placeholder="Enter your name" class="form-control"><br>
 
+            <h3>Ім'я по-батькові</h3>
+            <input type="text" th:value="${el.lastname}" name="lastname" placeholder="Enter your lastname" class="form-control"><br>
+
+            <h3>Емайл</h3>
+            <input type="text" th:value="${el.email}" name="email" placeholder="Enter your email" class="form-control"><br>
+
+            <h3>Звіт</h3>
+            <textarea name="report"  th:text="${el.report}" placeholder="Write your report here" class="form-control" rows="5" cols="33">
             </textarea><br>
 
             <button type="submit" class="btn btn-success">Зберегти зміни</button>

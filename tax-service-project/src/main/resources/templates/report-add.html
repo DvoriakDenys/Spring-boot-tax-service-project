@@ -14,14 +14,23 @@
     <h1>Новий звіт</h1><br><br>
     <form action="/client/report/add" method="post">
 
+        <h3>Напишіть тему звіта</h3>
+        <input type="text" name="nameOfReport" placeholder="Write the topic of the report" class="form-control"><br>
+
+        <h3>Напишіть своє прізвище</h3>
+        <input type="text" name="firstname" placeholder="Enter your firstname" class="form-control"><br>
+
         <h3>Напишіть своє ім'я</h3>
-        <input type="text" name="name" placeholder="enter your name" class="form-control"><br>
+        <input type="text" name="name" placeholder="Enter your name" class="form-control"><br>
+
+        <h3>Напишіть своє ім'я по-батькові</h3>
+        <input type="text" name="lastname" placeholder="Enter your lastname" class="form-control"><br>
 
         <h3>Напишіть свою почту</h3>
-        <input type="text" name="email" placeholder="enter your email" class="form-control"><br>
+        <input type="text" name="email" placeholder="Enter your email" class="form-control"><br>
 
         <h3>Напишіть свій звіт</h3>
-        <textarea name="report" placeholder="write your report here" class="form-control" rows="5" cols="33"></textarea><br>
+        <textarea name="report" placeholder="Write your report here" class="form-control" rows="5" cols="33"></textarea><br>
 
         <button type="submit" class="btn btn-success">Подати звіт</button>
     </form>

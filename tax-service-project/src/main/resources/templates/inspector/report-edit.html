@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Редактирование репорта</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:insert="blocks/header-inspector :: header"></div>
+
+<div class="container mt-5 mb-5">
+    <div th:each="el : ${editReport}">
+        <h1>Звіт клієнта</h1>
+        <br>
+        <br>
+
+        <form action="/inspector/report/edit" method="post">  <!--        action=""-->
+
+            <input type="hidden" th:value="${el.id}" name="id" class="form-control"><br>
+
+            <h3>Клієнт</h3>
+            <input disabled type="text" th:value="${el.firstname} + ' ' + ${el.name} + ' ' + ${el.lastname}"
+                   name="name" class="form-control"><br>
+
+            <h3>Емайл</h3>
+            <input disabled name="email" th:value="${el.email}" class="form-control"><br>
+
+            <h3>Звіт</h3>
+            <textarea disabled name="report" th:text="${el.report}" class="form-control" rows="5" cols="33">
+            </textarea><br>
+
+            <h3>Коментар</h3>
+            <textarea name="comment" th:text="${el.comment}" placeholder="Write your comment here" class="form-control" rows="5" cols="33">
+            </textarea><br>
+
+<!--                    <p><select size="1" name="Статус">-->
+<!--                        <option disabled>Виберіть статус</option>-->
+<!--                        <option value="el.status" selected>Прийнятий</option>-->
+<!--                        <option value="el.status">Не прийнятий</option>-->
+<!--                        <option value="el.status">Поданий</option>-->
+<!--                    </select></p>-->
+
+<!--                    <p><input type="submit" value="Отправить"></p>-->
+
+            <button type="submit" class="btn btn-success">Зберегти коментар</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

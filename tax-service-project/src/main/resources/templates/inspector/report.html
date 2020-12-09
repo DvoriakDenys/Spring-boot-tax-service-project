@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Podatkova</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div th:insert="blocks/header-inspector :: header"></div>
+
+<div class="container mt-5">
+    <h1>Список звітів</h1>
+
+    <div>
+        <div th:each="el : ${reports}" class="alert alert-info mt-2">
+
+            <p><b>Тема звіта</b> <span th:text="${el.nameOfReport}"></span></p>
+
+            <p><b> Час створення</b> <span th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span>
+            </p>
+            <a th:href="'/inspector/report/' + ${el.id}" class="btn btn-warning"> Переглянути звіт </a> <br>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-success">Прийняти</button>
+                <button type="submit" class="btn btn-danger">Відхилити</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

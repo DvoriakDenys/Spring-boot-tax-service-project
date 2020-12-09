@@ -8,16 +8,16 @@ import java.util.List;
 
 public interface ReportService {
 
-//    Report saveReport(ReportDTO reportDTO);
     Report saveReport(ReportDTO reportDTO);
 
     List<Report> findAll();
-//    Report editReport(ReportDTO reportDTO);
+
     void updateReport (ReportDTO report);
-//    Optional<Report> findById(Long id);
+
+    void updateComment(Long id, String comment);
+
     void deleteReport (final Long id);
 
     Report findById(Long id);
 
-//    Report saveAndAddReport(ReportDTO reportDTO);
 }

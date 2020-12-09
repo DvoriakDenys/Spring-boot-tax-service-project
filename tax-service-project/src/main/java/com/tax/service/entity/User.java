@@ -1,7 +1,5 @@
 package com.tax.service.entity;
-
 import lombok.*;
-
 import javax.persistence.*;
 
 @Data
@@ -15,6 +13,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
     @Column(nullable = false)
     private String name;

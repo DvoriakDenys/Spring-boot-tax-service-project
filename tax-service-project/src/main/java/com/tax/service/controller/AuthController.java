@@ -23,7 +23,6 @@ public class AuthController {
 
         } else if (Role.INSPECTOR.equalsIgnoreCase(role)) {
             return "redirect:/inspector";
-
         }
         return "error";
     }

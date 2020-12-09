@@ -1,11 +1,10 @@
 package com.tax.service.dto;
 
+import com.tax.service.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +13,15 @@ import java.time.LocalDate;
 public class ReportDTO {
 
     private Long id;
+    private String firstname;
     private String name;
-//    private LocalDate data;
+    private String lastname;
     private String email;
     private String report;
+    private String createdDate;
+    private String comment;
+    private Status status;
+    private String nameOfReport;
 //    private double amount;
+
 }

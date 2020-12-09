@@ -15,14 +15,26 @@
 
     <div th:each="el : ${report}" class="alert alert-info mt-2">
 
-        <h1>Optional</h1>
+        <h1>Звіт клієнта</h1>
 
-        <p><b> Name </b> <span th:text="${el.name}"></span></p>
-        <p><b> Report </b> <span th:text="${el.report}"></span></p>
+        <h3>Клієнт</h3>
+        <input disabled type="text" th:value="${el.firstname} + ' ' + ${el.name} + ' ' + ${el.lastname}" class="form-control"><br>
+
+        <h3>Емайл</h3>
+        <input disabled type="text" th:value="${el.email}" name="email"  class="form-control"><br>
+
+        <h3>Звіт</h3>
+        <textarea disabled name="report"  th:text="${el.report}" class="form-control" rows="5" cols="33">
+            </textarea><br>
+
+        <p><b> Час створення звіта</b> <span th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+
+        <h3>Коментар від інспектора</h3>
+        <textarea disabled name="comment" th:text="${el.comment}" placeholder="The inspector has not left any comments yet" class="form-control" rows="5" cols="33">
+            </textarea><br>
+
 
         <a th:href="'/client/report/edit/' + ${el.id}" class="btn btn-warning"> Редагувати </a><br><br>
-
-<!--        <input type="hidden" th:value="${el.id}" name="id"  class="form-control"><br>-->
         <form th:method="post" th:action="'/client/report/remove/' + ${el.id}">
             <button class="btn btn-warning" type="submit" > Удалити </button>
         </form>
