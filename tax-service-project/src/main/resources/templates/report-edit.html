@@ -11,34 +11,32 @@
 
 <div class="container mt-5 mb-5">
     <div th:each="el : ${editReport}">
-        <h1>Редагування репорта</h1>
+        <h2 th:text="#{report.editReport}"></h2>
         <br>
-        <br>
-
         <form action="/client/report/edit" method="post" >  <!--        action=""-->
 
             <input type="hidden" th:value="${el.id}" name="id"  class="form-control"><br>
 
-            <h3>Тема звіта</h3>
+            <h4 th:text="#{front.topic}"></h4>
             <input type="text" th:value="${el.nameOfReport}" name="nameOfReport" placeholder="Write the topic of the report" class="form-control"><br>
 
-            <h3>Прізвище</h3>
+            <h4 th:text="#{client.lastName}"></h4>
             <input type="text" th:value="${el.firstname}" name="firstname" placeholder="Enter your firstname" class="form-control"><br>
 
-            <h3>Ім'я</h3>
+            <h4 th:text="#{client.firstName}"></h4>
             <input type="text" th:value="${el.name}" name="name" placeholder="Enter your name" class="form-control"><br>
 
-            <h3>Ім'я по-батькові</h3>
+            <h4 th:text="#{client.middleName}"></h4>
             <input type="text" th:value="${el.lastname}" name="lastname" placeholder="Enter your lastname" class="form-control"><br>
 
-            <h3>Емайл</h3>
+            <h4 th:text="#{client.email}"></h4>
             <input type="text" th:value="${el.email}" name="email" placeholder="Enter your email" class="form-control"><br>
 
-            <h3>Звіт</h3>
+            <h4 th:text="#{front.report}"></h4>
             <textarea name="report"  th:text="${el.report}" placeholder="Write your report here" class="form-control" rows="5" cols="33">
             </textarea><br>
 
-            <button type="submit" class="btn btn-success">Зберегти зміни</button>
+            <button type="submit" class="btn btn-success"> <span th:text="#{report.saveEdit}"></span> </button>
 
         </form>
     </div>

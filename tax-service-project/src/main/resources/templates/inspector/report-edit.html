@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Редактирование репорта</title>
+    <title>Podatkova</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -11,26 +11,25 @@
 
 <div class="container mt-5 mb-5">
     <div th:each="el : ${editReport}">
-        <h1>Звіт клієнта</h1>
-        <br>
-        <br>
+        <h2 th:text="#{client.report}"></h2>
+        <br> <br>
 
         <form action="/inspector/report/edit" method="post">  <!--        action=""-->
 
             <input type="hidden" th:value="${el.id}" name="id" class="form-control"><br>
 
-            <h3>Клієнт</h3>
+            <h3 th:text="#{front.client}"></h3>
             <input disabled type="text" th:value="${el.firstname} + ' ' + ${el.name} + ' ' + ${el.lastname}"
                    name="name" class="form-control"><br>
 
-            <h3>Емайл</h3>
+            <h3 th:text="#{client.email}"></h3>
             <input disabled name="email" th:value="${el.email}" class="form-control"><br>
 
-            <h3>Звіт</h3>
+            <h3 th:text="#{front.report}"></h3>
             <textarea disabled name="report" th:text="${el.report}" class="form-control" rows="5" cols="33">
             </textarea><br>
 
-            <h3>Коментар</h3>
+            <h3 th:text="#{report.comment}"></h3>
             <textarea name="comment" th:text="${el.comment}" placeholder="Write your comment here" class="form-control" rows="5" cols="33">
             </textarea><br>
 
@@ -43,7 +42,7 @@
 
 <!--                    <p><input type="submit" value="Отправить"></p>-->
 
-            <button type="submit" class="btn btn-success">Зберегти коментар</button>
+            <button type="submit" class="btn btn-success"><span th:text="#{inspector.saveComment}"></span></button>
         </form>
     </div>
 </div>

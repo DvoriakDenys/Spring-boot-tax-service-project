@@ -10,15 +10,14 @@
 <div th:insert="blocks/header-client :: header"></div>
 
 <div class="container mt-5">
-    <h1>Список звітів</h1>
+    <h1 th:text="#{front.listOfReports}"></h1>
 
     <div>
         <div th:each="el : ${reports}" class="alert alert-info mt-2">
 
-            <p><b>Тема репорта</b> <span th:text="${el.nameOfReport}"></span></p>
+            <p><b th:text="#{front.topic}"></b> <span th:text="${el.nameOfReport}"></span></p>
 
-            <a th:href="'/client/report/' + ${el.id}" class="btn btn-warning"> Переглянути звіт </a>
-
+            <a th:href="'/client/report/' + ${el.id}" class="btn btn-warning"> <span th:text="#{report.viewReport}"></span></a>
         </div>
     </div>
 </div>

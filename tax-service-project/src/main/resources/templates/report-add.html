@@ -11,30 +11,29 @@
 
 
 <div class="container mt-5 mb-5">
-    <h1>Новий звіт</h1><br><br>
-    <form action="/client/report/add" method="post">
+    <h1 th:text="#{front.newReport}" ></h1><br><br>
 
-        <h3>Напишіть тему звіта</h3>
+    <form action="/client/report/add" method="post">
+        <h3 th:text="#{report.topic}"></h3>
         <input type="text" name="nameOfReport" placeholder="Write the topic of the report" class="form-control"><br>
 
-        <h3>Напишіть своє прізвище</h3>
+        <h3 th:text="#{payer.lastName}"></h3>
         <input type="text" name="firstname" placeholder="Enter your firstname" class="form-control"><br>
 
-        <h3>Напишіть своє ім'я</h3>
+        <h3 th:text="#{payer.firstName}"></h3>
         <input type="text" name="name" placeholder="Enter your name" class="form-control"><br>
 
-        <h3>Напишіть своє ім'я по-батькові</h3>
+        <h3 th:text="#{payer.middleName}"></h3>
         <input type="text" name="lastname" placeholder="Enter your lastname" class="form-control"><br>
 
-        <h3>Напишіть свою почту</h3>
+        <h3 th:text="#{payer.email}"></h3>
         <input type="text" name="email" placeholder="Enter your email" class="form-control"><br>
 
-        <h3>Напишіть свій звіт</h3>
+        <h3 th:text="#{report.create}"></h3>
         <textarea name="report" placeholder="Write your report here" class="form-control" rows="5" cols="33"></textarea><br>
 
-        <button type="submit" class="btn btn-success">Подати звіт</button>
+        <button type="submit" class="btn btn-success"><span th:text="#{report.submit}"></span></button>
     </form>
 </div>
-
 </body>
 </html>

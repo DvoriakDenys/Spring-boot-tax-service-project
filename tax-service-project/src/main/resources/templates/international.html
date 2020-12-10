@@ -1,13 +1,16 @@
-<!--<%@ taglib uri= "http://www.springframework.org/tags" prefix="lang" %>-->
-
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://www.w3.org/1999/XSL/Transform">
 <head>
     <meta charset="UTF-8">
     <title th:utext="#{label.title}"></title>
 </head>
 <body>
 <!--<h1 th:text="#{greeting}"></h1>-->
-    <p th:text="${status}"></p>
+<h1 th:text="#{greeting}"></h1>
+
+    <div>
+        <a th:href="@{'?locale=en'}">en</a>
+        <a th:href="@{'?locale=uk'}">uk</a>
+    </div>
 </body>
 </html>

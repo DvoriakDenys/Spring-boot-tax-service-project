@@ -10,33 +10,35 @@
 <div th:insert="blocks/header-client :: header"></div>
 
 
-
 <div class="container mt-5">
 
     <div th:each="el : ${report}" class="alert alert-info mt-2">
 
-        <h1>Звіт клієнта</h1>
+        <h2 th:text="#{client.report}"></h2>
 
-        <h3>Клієнт</h3>
-        <input disabled type="text" th:value="${el.firstname} + ' ' + ${el.name} + ' ' + ${el.lastname}" class="form-control"><br>
+        <h4 th:text="#{front.client}"></h4>
+        <input disabled type="text" th:value="${el.firstname} + ' ' + ${el.name} + ' ' + ${el.lastname}"
+               class="form-control"><br>
 
-        <h3>Емайл</h3>
-        <input disabled type="text" th:value="${el.email}" name="email"  class="form-control"><br>
+        <h4 th:text="#{client.email}"></h4>
+        <input disabled type="text" th:value="${el.email}" name="email" class="form-control"><br>
 
-        <h3>Звіт</h3>
-        <textarea disabled name="report"  th:text="${el.report}" class="form-control" rows="5" cols="33">
+        <h4 th:text="#{front.report}"></h4>
+        <textarea disabled name="report" th:text="${el.report}" class="form-control" rows="5" cols="33">
             </textarea><br>
 
-        <p><b> Час створення звіта</b> <span th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+        <p><b th:text="#{report.date}"></b> <span
+                th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span></p>
 
-        <h3>Коментар від інспектора</h3>
-        <textarea disabled name="comment" th:text="${el.comment}" placeholder="The inspector has not left any comments yet" class="form-control" rows="5" cols="33">
+        <h4 th:text="#{front.commentFromInspector}"></h4>
+        <textarea disabled name="comment" th:text="${el.comment}"
+                  placeholder="The inspector has not left any comments yet" class="form-control" rows="5" cols="33">
             </textarea><br>
 
 
-        <a th:href="'/client/report/edit/' + ${el.id}" class="btn btn-warning"> Редагувати </a><br><br>
+        <a th:href="'/client/report/edit/' + ${el.id}" class="btn btn-warning"><span th:text="#{front.edit}"></span></a><br><br>
         <form th:method="post" th:action="'/client/report/remove/' + ${el.id}">
-            <button class="btn btn-warning" type="submit" > Удалити </button>
+            <button class="btn btn-warning" type="submit"><span th:text="#{report.remove}"></span></button>
         </form>
 
 

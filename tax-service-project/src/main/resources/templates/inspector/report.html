@@ -15,14 +15,14 @@
     <div>
         <div th:each="el : ${reports}" class="alert alert-info mt-2">
 
-            <p><b>Тема звіта</b> <span th:text="${el.nameOfReport}"></span></p>
+            <p><b th:text="#{front.topic}"></b> <span th:text="${el.nameOfReport}"></span></p>
 
-            <p><b> Час створення</b> <span th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span>
+            <p><b th:text="#{report.date}"></b> <span th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span>
             </p>
-            <a th:href="'/inspector/report/' + ${el.id}" class="btn btn-warning"> Переглянути звіт </a> <br>
+            <a th:href="'/inspector/report/' + ${el.id}" class="btn btn-warning"> <span th:text="#{report.viewReport}"></span></a> <br>
             <div class="pull-right">
-                <button type="submit" class="btn btn-success">Прийняти</button>
-                <button type="submit" class="btn btn-danger">Відхилити</button>
+                <button type="submit" class="btn btn-success"> <span th:text="#{front.confirm}"></span></button>
+                <button type="submit" class="btn btn-danger"> <span th:text="#{front.cancel}"></span></button>
             </div>
         </div>
     </div>

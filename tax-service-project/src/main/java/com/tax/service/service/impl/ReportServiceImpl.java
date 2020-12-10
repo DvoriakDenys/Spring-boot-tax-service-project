@@ -6,6 +6,7 @@ import com.tax.service.repository.ReportRepository;
 import com.tax.service.repository.StatusRepository;
 import com.tax.service.service.ReportService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReportServiceImpl implements ReportService {
@@ -38,10 +39,12 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Report findById(final Long id) {
+        log.info("Get report by id:{}", id);
         return reportRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
     public void updateReport (final ReportDTO report){
+        log.info("Save report:{}", report);
         reportRepository.save(builderReport(report));
     }
 
@@ -53,6 +56,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     public void deleteReport (final Long id){
+        log.info("Delete report by id:{}", id);
         reportRepository.deleteById(id);
     }
 
