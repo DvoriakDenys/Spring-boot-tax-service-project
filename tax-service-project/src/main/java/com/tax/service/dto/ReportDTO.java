@@ -22,6 +22,5 @@ public class ReportDTO {
     private String comment;
     private Status status;
     private String nameOfReport;
-//    private double amount;
 
 }

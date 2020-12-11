@@ -1,16 +1,11 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:spring="http://www.w3.org/1999/XSL/Transform">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title th:utext="#{label.title}"></title>
+    <title>Spring Security Example</title>
 </head>
 <body>
-<!--<h1 th:text="#{greeting}"></h1>-->
-<h1 th:text="#{greeting}"></h1>
+<h1>Welcome!</h1>
 
-    <div>
-        <a th:href="@{'?locale=en'}">en</a>
-        <a th:href="@{'?locale=uk'}">uk</a>
-    </div>
+<p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
 </body>
 </html>

@@ -22,13 +22,13 @@ public class LocalLanguage implements WebMvcConfigurer {
         resolver.setDefaultLocale(new Locale("uk"));
         resolver.setCookieName("lang");
         resolver.setCookieMaxAge(60 * 60);
+//        resolver.removeCookie();
         return resolver;
     }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        return interceptor;
+        return new LocaleChangeInterceptor();
     }
 
     @Override

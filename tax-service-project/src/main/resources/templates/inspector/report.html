@@ -2,7 +2,7 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Podatkova</title>
+    <title th:text="#{front.tax}"></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -20,13 +20,21 @@
             <p><b th:text="#{report.date}"></b> <span th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span>
             </p>
             <a th:href="'/inspector/report/' + ${el.id}" class="btn btn-warning"> <span th:text="#{report.viewReport}"></span></a> <br>
-            <div class="pull-right">
-                <button type="submit" class="btn btn-success"> <span th:text="#{front.confirm}"></span></button>
-                <button type="submit" class="btn btn-danger"> <span th:text="#{front.cancel}"></span></button>
+            <div class="text-right">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+                    </label>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
