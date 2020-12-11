@@ -6,12 +6,10 @@ import javax.persistence.*;
 
 
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "status")
-@ToString
 public class Status {
     public final static String ACCEPT = "ACCEPT";
     public final static String UNCHECKED = "FILED";

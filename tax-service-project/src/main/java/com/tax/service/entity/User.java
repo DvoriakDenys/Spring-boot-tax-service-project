@@ -4,8 +4,6 @@ import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
-@Getter
-@Setter
 @NoArgsConstructor
 @Entity
 @Builder

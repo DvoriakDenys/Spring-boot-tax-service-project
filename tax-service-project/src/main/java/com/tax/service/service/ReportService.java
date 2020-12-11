@@ -2,6 +2,7 @@ package com.tax.service.service;
 
 import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ public interface ReportService {
     Report saveReport(ReportDTO reportDTO);
 
     List<Report> findAll();
+
+    Page<Report> findPaginated(int pageNo, int pageSize);
 
     void updateReport (ReportDTO report);
 

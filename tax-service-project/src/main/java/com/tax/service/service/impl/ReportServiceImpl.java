@@ -8,6 +8,9 @@ import com.tax.service.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -31,6 +34,13 @@ public class ReportServiceImpl implements ReportService {
         final Report report = builderReport(reportDTO);
         return reportRepository.save(report);
     }
+
+    @Override
+    public Page<Report> findPaginated(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return reportRepository.findAll(pageable);
+    }
+
 
     @Override
     public List<Report> findAll() {

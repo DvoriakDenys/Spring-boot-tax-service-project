@@ -6,9 +6,12 @@ import com.tax.service.entity.Status;
 import com.tax.service.service.ReportService;
 import com.tax.service.service.StatusService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -22,8 +25,23 @@ public class ClientController {
     }
 
     @GetMapping()
-    public String getClientPage() {
+    public String getClientPage(Model model) {
+        findPaginate(1, model);
         return "main-client";
+    }
+
+    @GetMapping("report/page/{pageNo}")
+    public String findPaginate(@PathVariable(value = "pageNo") int pageNo, Model model) {
+        int pageSize = 5;
+
+        Page<Report> page = reportService.findPaginated(pageNo, pageSize);
+        List<Report> reports = page.getContent();
+
+        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("reports", reports);
+        return "report";
     }
 
     @GetMapping("/report/add")
@@ -36,13 +54,6 @@ public class ClientController {
         log.info("Report payload:{}", reportDTO);
         reportService.saveReport(reportDTO);
         return "redirect:/client";
-    }
-
-    @GetMapping("/report")
-    public String reportPage(Model model) {
-        Iterable<Report> reports = reportService.findAll();
-        model.addAttribute("reports", reports);
-        return "report";
     }
 
     @GetMapping("/report/{id}")
@@ -69,12 +80,6 @@ public class ClientController {
     @PostMapping("/report/remove/{id}")
     public String deleteClientReportAction(@PathVariable Long id) {
         reportService.deleteReport(id);
-        return "redirect:/client/report";
+        return "redirect:/client/report/page/1";
     }
-
-//    @GetMapping()
-//    public String getInternationalPage() {
-//        return "international";
-//    }
-
 }
