@@ -10,36 +10,47 @@
 <div th:insert="blocks/header-client :: header"></div>
 
 <div class="container mt-5">
-    <h1 th:text="#{front.listOfReports}"></h1>
+    <h1 th:text="#{front.listOfReports}"></h1> <br>
+
+    <th>
+        <a th:href="@{${currentPage} + '?sortField=createdDate&sortDirection=' + ${reverseSortDir}}">
+            <span th:text="#{report.sortByDate}"></span></a>
+    </th>
 
     <div>
         <div th:each="el : ${reports}" class="alert alert-info mt-2">
 
             <p><b th:text="#{front.topic}"></b> <span th:text="${el.nameOfReport}"></span></p>
 
+            <p><b th:text="#{report.date}"></b> <span
+                    th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+
             <a th:href="'/client/report/' + ${el.id}" class="btn btn-warning"> <span
                     th:text="#{report.viewReport}"></span></a>
         </div>
     </div>
+    <br>
     <div th:if="${totalPages > 1}">
         <div class="row col-sm-10">
-            <div class="col-sm-2">
-                Total Rows: [[${totalItems}]]
-            </div>
             <div class="col-sm-1">
             <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-      <a th:if="${currentPage != i}" th:href="@{${i}}">[[${i}]]</a>
+      <a th:if="${currentPage != i}"
+         th:href="@{'/client/report/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">[[${i}]]</a>
       <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
             </span>
             </div>
-            <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages}" th:href="@{'/client/report/page/' + ${currentPage + 1}}">Next</a>
-                <span th:unless="${currentPage < totalPages}">Next</span>
+            <div class="col-sm-3">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/client/report/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}">
+                    <span th:text="#{front.nextPage}"></span></a>
+                <span th:unless="${currentPage < totalPages}" th:text="#{front.nextPage}"></span>
             </div>
 
-            <div class="col-sm-1">
-                <a th:if="${currentPage < totalPages + 1} and ${currentPage > 1}" th:href="@{'/client/report/page/' + ${currentPage - 1}}">Last</a>
-                <span th:unless="${currentPage != 1}">Last</span>
+            <div class="col-sm-3">
+                <a th:if="${currentPage < totalPages + 1} and ${currentPage > 1}"
+                   th:href="@{'/client/report/page/' + ${currentPage - 1}+ '?sortField=' + ${sortField} + '&sortDirection=' + ${sortDirection}}"><span
+                        th:text="#{front.lastPage}"></span></a>
+                <span th:unless="${currentPage != 1}" th:text="#{front.lastPage}"></span>
             </div>
         </div>
     </div>

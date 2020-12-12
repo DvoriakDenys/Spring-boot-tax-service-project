@@ -13,7 +13,7 @@ public interface ReportService {
 
     List<Report> findAll();
 
-    Page<Report> findPaginated(int pageNo, int pageSize);
+    Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
     void updateReport (ReportDTO report);
 

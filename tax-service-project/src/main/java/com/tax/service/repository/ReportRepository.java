@@ -12,6 +12,5 @@ import java.util.Optional;
 //TODO Spring data sort, page
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
-//    Iterable<Report> findAndSortReport (Sort sort);
     Page<Report> findAll(Pageable pageable);
 }

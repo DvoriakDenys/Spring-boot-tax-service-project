@@ -19,8 +19,8 @@
             <input type="hidden" th:value="${el.id}" name="id" class="form-control"><br>
 
             <h3 th:text="#{front.client}"></h3>
-            <input disabled type="text" th:value="${el.firstname} + ' ' + ${el.name} + ' ' + ${el.lastname}"
-                   name="name" class="form-control"><br>
+            <input disabled type="text" th:value="${el.lastName} + ' ' + ${el.firstName} + ' ' + ${el.middleName}"
+                   name="middleName" class="form-control"><br>
 
             <h3 th:text="#{client.email}"></h3>
             <input disabled name="email" th:value="${el.email}" class="form-control"><br>

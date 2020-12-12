@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -36,8 +37,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Page<Report> findPaginated(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+    public Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+        Sort.by(sortField).descending();
+
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return reportRepository.findAll(pageable);
     }
 
@@ -53,7 +57,7 @@ public class ReportServiceImpl implements ReportService {
         return reportRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 
-    public void updateReport (final ReportDTO report){
+    public void updateReport(final ReportDTO report) {
         log.info("Save report:{}", report);
         reportRepository.save(builderReport(report));
     }
@@ -65,22 +69,22 @@ public class ReportServiceImpl implements ReportService {
         reportRepository.save(report);
     }
 
-    public void deleteReport (final Long id){
+    public void deleteReport(final Long id) {
         log.info("Delete report by id:{}", id);
         reportRepository.deleteById(id);
     }
 
-    public Report builderReport(final ReportDTO reportDTO){
+    public Report builderReport(final ReportDTO reportDTO) {
         return Report.builder()
                 .id(reportDTO.getId())
-                .name(reportDTO.getName())
+                .lastName(reportDTO.getLastName())
+                .firstName(reportDTO.getFirstName())
+                .middleName(reportDTO.getMiddleName())
                 .email(reportDTO.getEmail())
-                .report(reportDTO.getReport())
-                .createdDate(LocalDateTime.now())
-                .firstname(reportDTO.getFirstname())
-                .lastname(reportDTO.getLastname())
                 .nameOfReport(reportDTO.getNameOfReport())
                 .comment(reportDTO.getComment())
+                .createdDate(LocalDateTime.now())
+                .report(reportDTO.getReport())
                 .build();
     }
 }

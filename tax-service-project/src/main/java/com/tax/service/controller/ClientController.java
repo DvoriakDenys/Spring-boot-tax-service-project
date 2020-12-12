@@ -26,21 +26,29 @@ public class ClientController {
 
     @GetMapping()
     public String getClientPage(Model model) {
-        findPaginate(1, model);
+        findPaginate(1, "createdDate", "asc",  model);
         return "main-client";
     }
 
     @GetMapping("report/page/{pageNo}")
-    public String findPaginate(@PathVariable(value = "pageNo") int pageNo, Model model) {
+    public String findPaginate(@PathVariable(name = "pageNo") final int pageNo,
+                               @RequestParam(name = "sortField", defaultValue = "id") final String sortField,
+                               @RequestParam( name = "sortDirection", defaultValue = "asc") final String sortDirection,
+                               Model model) {
         int pageSize = 5;
 
-        Page<Report> page = reportService.findPaginated(pageNo, pageSize);
+        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection);
         List<Report> reports = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("reports", reports);
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDirection", sortDirection);
+        model.addAttribute("reverseSortDir", sortDirection.equals("asc") ? "desc" : "asc");
+
         return "report";
     }
 
@@ -74,7 +82,7 @@ public class ClientController {
     public String editClientReportAction(ReportDTO report) {
         log.info("Report payload:{}", report);
         reportService.updateReport(report);
-        return "redirect:/client/report";
+        return "redirect:/client/report/page/1";
     }
 
     @PostMapping("/report/remove/{id}")
