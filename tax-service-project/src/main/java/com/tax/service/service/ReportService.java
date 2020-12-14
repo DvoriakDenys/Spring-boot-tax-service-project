@@ -21,7 +21,4 @@ public interface ReportService {
 
     Report findById(Long id);
 
-//    Report findReportByUserEmail(String email);
-//
-//    Report saveReportByUserId();
 }

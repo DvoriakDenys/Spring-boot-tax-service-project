@@ -57,15 +57,21 @@ public class ClientController {
     }
 
     @GetMapping("/report/add")
-    public String addClientReportPage() {
+    public String addClientReportPage(ReportDTO reportDTO, Model model) {
+        model.addAttribute("reportDTO", reportDTO);
         return "report-add";
     }
 
     @PostMapping("/report/add")
-    public String addClientReportAction(ReportDTO reportDTO, BindingResult result) {
+    public String addClientReportAction(@Valid ReportDTO reportDTO, BindingResult result) {
+        if(result.hasErrors()) {
+            return "report-add";
+        }
+        else {
             log.info("Report payload:{}", reportDTO);
             reportService.saveReport(reportDTO);
-            return "redirect:/client";
+            return "main-client";
+        }
     }
 
     @GetMapping("/report/{id}")
@@ -97,3 +103,4 @@ public class ClientController {
 
 
 }
+

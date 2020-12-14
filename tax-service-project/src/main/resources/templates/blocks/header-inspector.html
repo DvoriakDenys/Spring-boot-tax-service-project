@@ -2,8 +2,8 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
         <h5 class="my-0 mr-md-auto font-weight-normal" th:text="#{front.tax}"></h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a th:href="@{'?locale=uk'}" class="btn btn-primary btn-sm">UK</a>
-            <a th:href="@{'?locale=en'}" class="btn btn-warning btn-sm">EN</a>
+            <a th:href="@{'?locale=uk'}" class="btn btn-primary btn-sm" ><span th:text="#{changeLang.uk}" > </span></a>
+            <a th:href="@{'?locale=en'}" class="btn btn-warning btn-sm" ><span th:text="#{changeLang.en}" > </span></a>
             <a class="p-2 text-dark" href="/inspector"> <span th:text="#{front.main}"></span></a>
             <a class="p-2 text-dark" href="/inspector/report/page/1"> <span th:text="#{front.view}"></span></a>
         </nav>

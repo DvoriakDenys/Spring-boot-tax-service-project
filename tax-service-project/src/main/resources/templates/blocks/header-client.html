@@ -3,8 +3,8 @@
 
         <h5 class="my-0 mr-md-auto font-weight-normal" th:text="#{front.tax}" ></h5>
         <nav class="my-2 my-md-0 mr-md-3">
-                    <a th:href="@{'?locale=uk'}" class="btn btn-primary btn-sm" >UK</a>
-                    <a th:href="@{'?locale=en'}" class="btn btn-warning btn-sm" >EN</a>
+            <a th:href="@{'?locale=uk'}" class="btn btn-primary btn-sm" ><span th:text="#{changeLang.uk}" > </span></a>
+            <a th:href="@{'?locale=en'}" class="btn btn-warning btn-sm" ><span th:text="#{changeLang.en}" > </span></a>
                     <a class="p-2 text-dark" href="/client" th:text="#{front.main}" ></a>
                     <a class="p-2 text-dark" href="/client/report/page/1" th:text="#{front.report}"></a>
                     <a class="p-2 text-dark" href="/client/report/add" th:text="#{report.newReport}"></a>

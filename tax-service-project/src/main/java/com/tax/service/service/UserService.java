@@ -6,5 +6,4 @@ import com.tax.service.entity.User;
 public interface UserService {
     User findByEmail(final String email);
     User saveUser (UserDTO userDTO);
-    User findById (Long id);
 }

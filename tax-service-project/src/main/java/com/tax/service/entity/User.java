@@ -20,9 +20,9 @@ public class User {
     private String firstName;
     @Column(nullable = false)
     private String middleName;
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String password;
 
     @ManyToOne(fetch = FetchType.EAGER)
