@@ -37,7 +37,7 @@ public class InspectorController {
                                Model model) {
         int pageSize = 5;
 
-        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection);
+        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection, null);
         List<Report> reports = page.getContent();
 
         model.addAttribute("currentPage", pageNo);

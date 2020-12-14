@@ -27,7 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("User role:{}", role);
         final SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getRole());
 
-        return new org.springframework.security.core.userdetails.User(user.getFirstName(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
                 Collections.singletonList(authority));
     }
 }

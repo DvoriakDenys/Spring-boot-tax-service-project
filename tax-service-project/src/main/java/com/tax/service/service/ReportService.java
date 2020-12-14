@@ -11,9 +11,7 @@ public interface ReportService {
 
     Report saveReport(ReportDTO reportDTO);
 
-    List<Report> findAll();
-
-    Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
+    Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection, String userEmail);
 
     void updateReport (ReportDTO report);
 
@@ -23,4 +21,7 @@ public interface ReportService {
 
     Report findById(Long id);
 
+//    Report findReportByUserEmail(String email);
+//
+//    Report saveReportByUserId();
 }

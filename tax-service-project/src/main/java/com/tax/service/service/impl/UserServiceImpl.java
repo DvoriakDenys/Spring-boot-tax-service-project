@@ -31,6 +31,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(builderUser(userDTO));
     }
 
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(NoDataFound::new);
+    }
+
     public User builderUser (UserDTO userDTO){
         return User.builder()
                 .id(userDTO.getId())

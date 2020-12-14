@@ -37,19 +37,19 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection) {
+    public Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection, String email) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
         Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return reportRepository.findAll(pageable);
+        return reportRepository.findByUserEmail(email, pageable);
     }
 
 
-    @Override
-    public List<Report> findAll() {
-        return reportRepository.findAll();
-    }
+//    @Override
+//    public List<Report> findAll() {
+//        return reportRepository.findAll();
+//    }
 
     @Override
     public Report findById(final Long id) {

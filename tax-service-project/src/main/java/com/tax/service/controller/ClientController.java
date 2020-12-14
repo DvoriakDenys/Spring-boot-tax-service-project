@@ -3,18 +3,21 @@ package com.tax.service.controller;
 import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
 import com.tax.service.entity.Status;
+import com.tax.service.security.util.SecurityHelper;
 import com.tax.service.service.ReportService;
 import com.tax.service.service.StatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
-@Controller
 @Slf4j
+@Controller
 @RequestMapping(value = "/client")
 public class ClientController {
 
@@ -37,7 +40,8 @@ public class ClientController {
                                Model model) {
         int pageSize = 5;
 
-        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection);
+        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection,
+                SecurityHelper.extractEmailFromContext());
         List<Report> reports = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
@@ -58,10 +62,10 @@ public class ClientController {
     }
 
     @PostMapping("/report/add")
-    public String addClientReportAction(ReportDTO reportDTO) {
-        log.info("Report payload:{}", reportDTO);
-        reportService.saveReport(reportDTO);
-        return "redirect:/client";
+    public String addClientReportAction(ReportDTO reportDTO, BindingResult result) {
+            log.info("Report payload:{}", reportDTO);
+            reportService.saveReport(reportDTO);
+            return "redirect:/client";
     }
 
     @GetMapping("/report/{id}")
@@ -90,4 +94,6 @@ public class ClientController {
         reportService.deleteReport(id);
         return "redirect:/client/report/page/1";
     }
+
+
 }

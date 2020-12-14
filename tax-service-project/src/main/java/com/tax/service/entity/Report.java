@@ -32,4 +32,7 @@ public class Report {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

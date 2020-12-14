@@ -12,10 +12,20 @@
 <div class="container mt-5">
     <h1 th:text="#{front.listOfReports}"></h1>
 
-    <th>
-        <a th:href="@{${currentPage} + '?sortField=createdDate&sortDirection=' + ${reverseSortDir}}">
-            <span th:text="#{report.sortByDate}"></span></a>
-    </th>
+    <table class="table"  style="width:50%" >
+        <thead>
+        <tr>
+            <th scope="col">
+                <a th:href="@{${currentPage} + '?sortField=createdDate&sortDirection=' + ${reverseSortDir}}">
+                    <span> <p class="text-dark" th:text="#{report.sortByDate}"></p> </span></a>
+            </th>
+            <th scope="col">
+                <a th:href="@{${currentPage} + '?sortField=nameOfReport&sortDirection=' + ${reverseSortDir}}">
+                    <p class="text-dark">Sort by title </p> </a>
+            </th>
+        </tr>
+        </thead>
+    </table>
 
     <div>
         <div th:each="el : ${reports}" class="alert alert-info mt-2">
