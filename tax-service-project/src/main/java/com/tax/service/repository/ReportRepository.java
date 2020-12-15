@@ -10,10 +10,5 @@ import java.util.Optional;
 //TODO Spring data sort, page
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
-
-    Page<Report> findAll(Pageable pageable);
-
-    //    Report saveReportByUserId(Long id);
-
     Page<Report> findByUserEmail(String email, Pageable pageable);
 }

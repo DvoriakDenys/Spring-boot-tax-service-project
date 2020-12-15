@@ -1,10 +1,8 @@
 package com.tax.service.controller;
 
 
-import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
 import com.tax.service.service.ReportService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,7 +35,7 @@ public class InspectorController {
                                Model model) {
         int pageSize = 5;
 
-        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection, null);
+        Page<Report> page = reportService.findPaginatedInspector(pageNo, pageSize, sortField, sortDirection);
         List<Report> reports = page.getContent();
 
         model.addAttribute("currentPage", pageNo);

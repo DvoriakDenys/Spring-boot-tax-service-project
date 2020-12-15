@@ -2,23 +2,20 @@ package com.tax.service.service.impl;
 
 import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
+import com.tax.service.entity.User;
 import com.tax.service.repository.ReportRepository;
-import com.tax.service.repository.StatusRepository;
+import com.tax.service.repository.UserRepository;
+import com.tax.service.security.util.SecurityHelper;
 import com.tax.service.service.ReportService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+
 
 @Slf4j
 @Service
@@ -26,7 +23,7 @@ import java.util.List;
 public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
-    private final StatusRepository statusRepository;
+    private final UserRepository userRepository;
 
     //TODO Mapstruct
 
@@ -38,18 +35,22 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection, String email) {
+
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-        Sort.by(sortField).descending();
+                Sort.by(sortField).descending();
 
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return reportRepository.findByUserEmail(email, pageable);
     }
 
+    @Override
+    public Page<Report> findPaginatedInspector(int pageNo, int pageSize, String sortField, String sortDirection) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
 
-//    @Override
-//    public List<Report> findAll() {
-//        return reportRepository.findAll();
-//    }
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
+        return reportRepository.findAll(pageable);
+    }
 
     @Override
     public Report findById(final Long id) {
@@ -85,6 +86,12 @@ public class ReportServiceImpl implements ReportService {
                 .comment(reportDTO.getComment())
                 .createdDate(LocalDateTime.now())
                 .report(reportDTO.getReport())
+                .user(findByEmail(SecurityHelper.extractEmailFromContext()))
                 .build();
+    }
+
+    public User findByEmail(final String email) {
+        log.info("Get user by email:{}", email);
+        return userRepository.findUserByEmail(email);
     }
 }

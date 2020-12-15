@@ -2,7 +2,6 @@ package com.tax.service.controller;
 
 import com.tax.service.dto.UserDTO;
 import com.tax.service.entity.Role;
-import com.tax.service.entity.User;
 import com.tax.service.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;

@@ -2,10 +2,8 @@ package com.tax.service.controller;
 
 import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
-import com.tax.service.entity.Status;
 import com.tax.service.security.util.SecurityHelper;
 import com.tax.service.service.ReportService;
-import com.tax.service.service.StatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -36,7 +34,7 @@ public class ClientController {
     @GetMapping("report/page/{pageNo}")
     public String findPaginate(@PathVariable(name = "pageNo") final int pageNo,
                                @RequestParam(name = "sortField", defaultValue = "id") final String sortField,
-                               @RequestParam( name = "sortDirection", defaultValue = "asc") final String sortDirection,
+                               @RequestParam(name = "sortDirection", defaultValue = "asc") final String sortDirection,
                                Model model) {
         int pageSize = 5;
 

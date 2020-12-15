@@ -4,14 +4,14 @@ import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 
 public interface ReportService {
 
     Report saveReport(ReportDTO reportDTO);
 
     Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection, String userEmail);
+
+    Page<Report> findPaginatedInspector(int pageNo, int pageSize, String sortField, String sortDirection);
 
     void updateReport (ReportDTO report);
 
@@ -20,5 +20,4 @@ public interface ReportService {
     void deleteReport (final Long id);
 
     Report findById(Long id);
-
 }
