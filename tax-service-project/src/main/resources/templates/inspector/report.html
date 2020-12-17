@@ -26,15 +26,15 @@
         <div class="container">
             <h4><b th:text="#{sort.byStatus}"></b></h4>
             <div class="row">
-                    <button value="ACCEPT" name="status" type="submit" class="btn btn-light">
-                        <p style="color:Green"><b th:text="#{inspector.accept}"></b></p>
-                    </button>
-                    <button value="VERIFY" name="status" type="submit"class="btn btn-light">
-                        <p style="color:Orange"><b th:text="#{inspector.verify}"></b></p>
-                    </button>
-                    <button value="REFUSE" name="status" type="submit" class="btn btn-light">
-                        <p align="right" style="color:Red"><b th:text="#{inspector.refuse}"></b></p>
-                    </button>
+                <button value="ACCEPT" name="status" type="submit" class="btn btn-light">
+                    <p style="color:Green"><b th:text="#{inspector.accept}"></b></p>
+                </button>
+                <button value="VERIFY" name="status" type="submit" class="btn btn-light">
+                    <p style="color:Orange"><b th:text="#{inspector.verify}"></b></p>
+                </button>
+                <button value="REFUSE" name="status" type="submit" class="btn btn-light">
+                    <p align="right" style="color:Red"><b th:text="#{inspector.refuse}"></b></p>
+                </button>
             </div>
         </div>
 
@@ -43,6 +43,10 @@
             <div th:each="el : ${reports}" class="alert alert-info mt-2">
 
                 <p><b th:text="#{front.topic}"></b> <span th:text="${el.nameOfReport}"></span></p>
+
+                <p><b th:text="#{front.client}"></b>
+                    <span th:text="${el.user.lastName} + ' ' + ${el.user.firstName} + ' ' + ${el.user.middleName}"></span>
+                </p>
 
                 <p><b th:text="#{report.date}"></b> <span
                         th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span>
@@ -62,7 +66,6 @@
                         th:text="#{report.viewReport}"></span></a> <br>
             </div>
         </div>
-
 
 
         <div th:if="${totalPages > 1}">

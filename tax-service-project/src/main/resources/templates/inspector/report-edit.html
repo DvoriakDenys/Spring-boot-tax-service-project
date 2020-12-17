@@ -19,11 +19,11 @@
             <input type="hidden" th:value="${el.id}" name="id" class="form-control"><br>
 
             <h3 th:text="#{front.client}"></h3>
-            <input disabled type="text" th:value="${el.lastName} + ' ' + ${el.firstName} + ' ' + ${el.middleName}"
-                   name="middleName" class="form-control"><br>
+            <input disabled type="text" th:value="${el.user.lastName} + ' ' + ${el.user.firstName} + ' ' + ${el.user.middleName}"
+                   class="form-control"><br>
 
             <h3 th:text="#{client.email}"></h3>
-            <input disabled name="email" th:value="${el.email}" class="form-control"><br>
+            <input disabled name="email" th:value="${el.user.email}" class="form-control"><br>
 
             <h3 th:text="#{front.report}"></h3>
             <textarea disabled name="report" th:text="${el.report}" class="form-control" rows="5" cols="33">

@@ -18,10 +18,6 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String email;
     private String report;
     private String comment;
     private String nameOfReport;

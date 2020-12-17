@@ -83,10 +83,6 @@ public class ReportServiceImpl implements ReportService {
     public Report builderReport(final ReportDTO reportDTO) {
         return Report.builder()
                 .id(reportDTO.getId())
-                .lastName(reportDTO.getLastName())
-                .firstName(reportDTO.getFirstName())
-                .middleName(reportDTO.getMiddleName())
-                .email(reportDTO.getEmail())
                 .nameOfReport(reportDTO.getNameOfReport())
                 .comment(reportDTO.getComment())
                 .createdDate(LocalDateTime.now())
