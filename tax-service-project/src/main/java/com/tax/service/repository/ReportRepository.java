@@ -11,4 +11,6 @@ import java.util.Optional;
 
 public interface ReportRepository extends JpaRepository<Report, Long> {
     Page<Report> findByUserEmail(String email, Pageable pageable);
+
+    Page<Report> findAllByStatusName(Pageable pageable, String statusName);
 }

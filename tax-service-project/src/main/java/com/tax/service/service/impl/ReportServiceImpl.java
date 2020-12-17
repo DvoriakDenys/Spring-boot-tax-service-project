@@ -1,9 +1,10 @@
 package com.tax.service.service.impl;
-
 import com.tax.service.dto.ReportDTO;
 import com.tax.service.entity.Report;
+import com.tax.service.entity.Status;
 import com.tax.service.entity.User;
 import com.tax.service.repository.ReportRepository;
+import com.tax.service.repository.StatusRepository;
 import com.tax.service.repository.UserRepository;
 import com.tax.service.security.util.SecurityHelper;
 import com.tax.service.service.ReportService;
@@ -13,8 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Slf4j
@@ -24,7 +28,7 @@ public class ReportServiceImpl implements ReportService {
 
     private final ReportRepository reportRepository;
     private final UserRepository userRepository;
-
+    private final StatusRepository statusRepository;
     //TODO Mapstruct
 
     @Override
@@ -35,21 +39,23 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection, String email) {
-
-        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
-                Sort.by(sortField).descending();
-
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return reportRepository.findByUserEmail(email, pageable);
+        return reportRepository.findByUserEmail(email, getPageable(pageNo, pageSize, sortField, sortDirection));
     }
 
     @Override
-    public Page<Report> findPaginatedInspector(int pageNo, int pageSize, String sortField, String sortDirection) {
+    public Page<Report> findPaginatedInspector(int pageNo, int pageSize, String sortField, String sortDirection,
+                                               String status) {
+        if (status == null) {
+            return reportRepository.findAll(getPageable(pageNo, pageSize, sortField, sortDirection));
+        } else {
+            return reportRepository.findAllByStatusName(getPageable(pageNo, pageSize, sortField, sortDirection), status);
+        }
+    }
+
+    public Pageable getPageable (int pageNo, int pageSize, String sortField, String sortDirection){
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
-
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
-        return reportRepository.findAll(pageable);
+        return PageRequest.of(pageNo - 1, pageSize, sort);
     }
 
     @Override
@@ -64,9 +70,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void updateComment(final Long id, final String comment) {
+    public void updateStatusAndComment(final Long id, final String comment, final String status) {
         final Report report = findById(id);
+        Status findStatus = statusRepository.findStatusByName(status);
         report.setComment(comment);
+        report.setStatus(findStatus);
         reportRepository.save(report);
     }
 
@@ -87,11 +95,17 @@ public class ReportServiceImpl implements ReportService {
                 .createdDate(LocalDateTime.now())
                 .report(reportDTO.getReport())
                 .user(findByEmail(SecurityHelper.extractEmailFromContext()))
+                .status(findByName(Status.UNCHECKED))
                 .build();
     }
 
     public User findByEmail(final String email) {
         log.info("Get user by email:{}", email);
         return userRepository.findUserByEmail(email);
+    }
+
+    public Status findByName(String name) {
+        log.info("Get status by name:{}", name);
+        return statusRepository.findStatusByName(name);
     }
 }

@@ -9,11 +9,12 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "status")
 public class Status {
     public final static String ACCEPT = "ACCEPT";
-    public final static String UNCHECKED = "FILED";
-    public final static String NOT_ACCEPTED = "NOT_ACCEPTED";
+    public final static String UNCHECKED = "VERIFY";
+    public final static String NOT_ACCEPTED = "REFUSE";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

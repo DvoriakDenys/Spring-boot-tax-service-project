@@ -13,14 +13,13 @@
 <div class="container mt-5 mb-5">
     <h1 th:text="#{front.newReport}"></h1><br><br>
 
-    <!--    <form action="/client/report/add" method="post">-->
     <form action="#" th:action="@{/client/report/add}" th:object="${reportDTO}" method="post">
 
         <h3 th:text="#{report.topic}"></h3>
         <input type="text" name="nameOfReport" placeholder="Write the topic of the report" class="form-control"><br>
 
         <h3 th:text="#{payer.lastName}"></h3>
-        <input type="text" name="lastName" placeholder="Enter your last name" class="form-control"><br>
+        <input type="text" name="lastName" placeholder="Write the topic of the report" class="form-control"><br>
 
         <h3 th:text="#{payer.firstName}"></h3>
         <input type="text" name="firstName" placeholder="Enter your first name" class="form-control"><br>

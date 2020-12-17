@@ -27,7 +27,7 @@ public class ClientController {
 
     @GetMapping()
     public String getClientPage(Model model) {
-        findPaginate(1, "createdDate", "asc",  model);
+        findPaginate(1, "createdDate", "asc", model);
         return "main-client";
     }
 
@@ -40,6 +40,7 @@ public class ClientController {
 
         Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection,
                 SecurityHelper.extractEmailFromContext());
+
         List<Report> reports = page.getContent();
 
         model.addAttribute("currentPage", pageNo);
