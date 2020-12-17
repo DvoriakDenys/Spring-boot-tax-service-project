@@ -14,11 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Slf4j
@@ -38,24 +35,24 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public Page<Report> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection, String email) {
-        return reportRepository.findByUserEmail(email, getPageable(pageNo, pageSize, sortField, sortDirection));
+    public Page<Report> findPaginated(int currentPage, int pageSize, String sortField, String sortDirection, String email) {
+        return reportRepository.findByUserEmail(email, getPageable(currentPage, pageSize, sortField, sortDirection));
     }
 
     @Override
-    public Page<Report> findPaginatedInspector(int pageNo, int pageSize, String sortField, String sortDirection,
+    public Page<Report> findPaginatedInspector(int currentPage, int pageSize, String sortField, String sortDirection,
                                                String status) {
         if (status == null) {
-            return reportRepository.findAll(getPageable(pageNo, pageSize, sortField, sortDirection));
+            return reportRepository.findAll(getPageable(currentPage, pageSize, sortField, sortDirection));
         } else {
-            return reportRepository.findAllByStatusName(getPageable(pageNo, pageSize, sortField, sortDirection), status);
+            return reportRepository.findAllByStatusName(getPageable(currentPage, pageSize, sortField, sortDirection), status);
         }
     }
 
-    public Pageable getPageable (int pageNo, int pageSize, String sortField, String sortDirection){
+    public Pageable getPageable (int currentPage, int pageSize, String sortField, String sortDirection){
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
-        return PageRequest.of(pageNo - 1, pageSize, sort);
+        return PageRequest.of(currentPage - 1, pageSize, sort);
     }
 
     @Override

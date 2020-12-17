@@ -31,19 +31,19 @@ public class ClientController {
         return "main-client";
     }
 
-    @GetMapping("report/page/{pageNo}")
-    public String findPaginate(@PathVariable(name = "pageNo") final int pageNo,
+    @GetMapping("report/page/{currentPage}")
+    public String findPaginate(@PathVariable(name = "currentPage") final int currentPage,
                                @RequestParam(name = "sortField", defaultValue = "id") final String sortField,
                                @RequestParam(name = "sortDirection", defaultValue = "asc") final String sortDirection,
                                Model model) {
         int pageSize = 5;
 
-        Page<Report> page = reportService.findPaginated(pageNo, pageSize, sortField, sortDirection,
+        Page<Report> page = reportService.findPaginated(currentPage, pageSize, sortField, sortDirection,
                 SecurityHelper.extractEmailFromContext());
 
         List<Report> reports = page.getContent();
 
-        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("reports", reports);

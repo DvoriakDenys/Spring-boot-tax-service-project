@@ -3,7 +3,6 @@ package com.tax.service.controller;
 
 import com.tax.service.entity.Report;
 import com.tax.service.service.ReportService;
-import com.tax.service.service.StatusService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +15,9 @@ import java.util.List;
 public class InspectorController {
 
     private final ReportService reportService;
-    private final StatusService statusService;
 
-    public InspectorController(final ReportService reportService, StatusService statusService) {
+    public InspectorController(final ReportService reportService) {
         this.reportService = reportService;
-        this.statusService = statusService;
     }
 
     @GetMapping()
@@ -31,22 +28,21 @@ public class InspectorController {
     }
 
 
-    @GetMapping("report/page/{pageNo}")
-    public String findPaginate(@PathVariable(name = "pageNo") final int pageNo,
+    @GetMapping("report/page/{currentPage}")
+    public String findPaginate(@PathVariable(name = "currentPage") final int currentPage,
                                @RequestParam(name = "sortField", defaultValue = "id") final String sortField,
                                @RequestParam(name = "sortDirection", defaultValue = "asc") final String sortDirection,
                                @RequestParam(name = "status", required = false) String status, Model model) {
         int pageSize = 5;
 
-        Page<Report> page = reportService.findPaginatedInspector(pageNo, pageSize, sortField, sortDirection, status);
+        Page<Report> page = reportService.findPaginatedInspector(currentPage, pageSize, sortField, sortDirection, status);
         List<Report> reports = page.getContent();
 
-        model.addAttribute("currentPage", pageNo);
+        model.addAttribute("currentPage", currentPage);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("reports", reports);
 
-        model.addAttribute("status", status);
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("reverseSortDir", sortDirection.equals("asc") ? "desc" : "asc");

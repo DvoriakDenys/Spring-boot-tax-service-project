@@ -12,7 +12,7 @@
 <div class="container mt-5">
     <h1 th:text="#{front.listOfReports}"></h1> <br>
 
-    <table class="table" style="width:50%" >
+    <table class="table" style="width:50%">
         <thead>
         <tr>
             <th scope="col">
@@ -22,7 +22,6 @@
         </tr>
         </thead>
     </table>
-
     <div>
         <div th:each="el : ${reports}" class="alert alert-info mt-2">
 
@@ -31,8 +30,21 @@
             <p><b th:text="#{report.date}"></b> <span
                     th:text="${#temporals.format(el.createdDate, 'dd-MM-yyyy HH:mm')}"></span></p>
 
-            <a th:href="'/client/report/' + ${el.id}" class="btn btn-warning"> <span
-                    th:text="#{report.viewReport}"></span></a>
+            <div>
+                <div th:if="${el.status.name == 'ACCEPT'}">
+                    <p align="right" style="color:Green"><b th:text="#{client.accept}"></b></p>
+                </div>
+                <div th:if="${el.status.name == 'VERIFY'}">
+                    <p align="right" style="color:Orange"><b th:text="#{client.verify}"></b></p>
+                </div>
+                <div th:if="${el.status.name == 'REFUSE'}">
+                    <p align="right" style="color:Red"><b th:text="#{client.refuse}"></b></p>
+                </div>
+            </div>
+
+                <a th:href="'/client/report/' + ${el.id}" class="btn btn-warning"> <span
+                        th:text="#{report.viewReport}"></span></a>
+
         </div>
     </div>
     <br>

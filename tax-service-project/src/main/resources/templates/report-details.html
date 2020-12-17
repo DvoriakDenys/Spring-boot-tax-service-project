@@ -35,8 +35,10 @@
                   placeholder="The inspector has not left any comments yet" class="form-control" rows="5" cols="33">
             </textarea><br>
 
-
+        <div th:if="${el.status.name == 'REFUSE'}">
         <a th:href="'/client/report/edit/' + ${el.id}" class="btn btn-warning"><span th:text="#{front.edit}"></span></a><br><br>
+        </div>
+
         <form th:method="post" th:action="'/client/report/remove/' + ${el.id}">
             <button class="btn btn-warning" type="submit"><span th:text="#{report.remove}"></span></button>
         </form>
